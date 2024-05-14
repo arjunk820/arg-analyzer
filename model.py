@@ -9,7 +9,7 @@ model = BertForSequenceClassification.from_pretrained(bertBase)
 
 def score(text):
 
-    encoded_inputs = tokenizer(text, return_tensors="pt")
+    encoded_inputs = tokenizer(text, return_tensors="pt", truncation=True)
     outputs = model(**encoded_inputs)
 
     probabilities = torch.softmax(outputs.logits, dim=-1).detach().numpy()
