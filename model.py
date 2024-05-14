@@ -9,7 +9,7 @@ model = BertForSequenceClassification.from_pretrained(bertBase, num_labels=2)
 
 def score(text):
 
-    inputs = tokenizer(text, return_tensors="pt", max_length=512, truncation=True, padding="max_length")
+    inputs = tokenizer(text, return_tensors="pt", max_length=512, truncation=True)
 
     device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
     model.to(device)
@@ -18,12 +18,9 @@ def score(text):
     with torch.no_grad():
         outputs = model(**inputs)
 
-    # Output processing
-    logits = outputs.logits
-    probabilities = torch.softmax(logits, dim=-1).cpu().numpy()
+    probabilities = torch.softmax(outputs.logits, dim=-1).cpu().numpy()
 
-    # Positive class probability
-    return probabilities[0][1].item()
+    return probabilities[:, 1].item()
 
 data = pd.read_csv("./data/arg_quality_rank_30k.csv")
 argument = data['argument']
