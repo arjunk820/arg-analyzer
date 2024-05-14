@@ -5,20 +5,14 @@ from sklearn.model_selection import train_test_split
 
 bertBase = "bert-base-uncased" # bert-large is too expensive
 tokenizer = BertTokenizer.from_pretrained(bertBase)
-model = BertForSequenceClassification.from_pretrained(bertBase, num_labels=2)
+model = BertForSequenceClassification.from_pretrained(bertBase)
 
 def score(text):
 
-    inputs = tokenizer(text, return_tensors="pt", max_length=512, truncation=True)
+    encoded_inputs = tokenizer(text, return_tensors="pt")
+    outputs = model(**encoded_inputs)
 
-    device = torch.device("cuda" if torch.cuda.is_available() else "cpu")
-    model.to(device)
-    inputs = {k: v.to(device) for k, v in inputs.items()}
-
-    with torch.no_grad():
-        outputs = model(**inputs)
-
-    probabilities = torch.softmax(outputs.logits, dim=-1).cpu().numpy()
+    probabilities = torch.softmax(outputs.logits, dim=-1).detach().numpy()
 
     return probabilities[:, 1].item()
 
