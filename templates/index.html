@@ -2,14 +2,15 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>LawyerAI Argument Analyzer</title>
+    <title>LawyerAI</title>
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
     <div class="container">
+        <h1 id="headerTitle">Argument Quality Analysis</h1>
         <form id="argForm">
             <textarea name="text" placeholder="Enter your argument here..."></textarea><br>
-            <input type="submit" value="Evaluate">
+            <input type="submit" value="Score">
         </form>
     </div>
     <div id="result"></div>
@@ -22,6 +23,7 @@
                 body: formData
             }).then(response => response.json()).then(data => {
                 document.getElementById('argForm').style.display = 'none';
+                document.getElementById('headerTitle').style.display = 'none';
                 var resultDiv = document.getElementById('result');
                 resultDiv.innerHTML = "<strong>Argument:</strong> " + data.Argument + "<br><strong>Quality Score:</strong> " + data['Quality Score'];
                 resultDiv.style.display = 'block';
