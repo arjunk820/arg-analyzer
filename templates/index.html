@@ -3,11 +3,30 @@
 <head>
     <meta charset="UTF-8">
     <title>LawyerAI Argument Analyzer</title>
+    <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
-    <form action="/evaluate" method="post">
-        <textarea name="text" rows="4" cols="50" placeholder="Enter your argument here..."></textarea><br>
-        <input type="submit" value="Evaluate">
-    </form>
+    <div class="container">
+        <form id="argForm">
+            <textarea name="text" placeholder="Enter your argument here..."></textarea><br>
+            <input type="submit" value="Evaluate">
+        </form>
+    </div>
+    <div id="result"></div>
+    <script>
+        document.getElementById('argForm').onsubmit = function(event) {
+            event.preventDefault();
+            var formData = new FormData(this);
+            fetch('/evaluate', {
+                method: 'POST',
+                body: formData
+            }).then(response => response.json()).then(data => {
+                document.getElementById('argForm').style.display = 'none';
+                var resultDiv = document.getElementById('result');
+                resultDiv.innerHTML = "<strong>Argument:</strong> " + data.Argument + "<br><strong>Quality Score:</strong> " + data['Quality Score'];
+                resultDiv.style.display = 'block';
+            }).catch(error => console.error('Error:', error));
+        };
+    </script>
 </body>
 </html>
