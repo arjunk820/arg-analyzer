@@ -24,6 +24,8 @@
             }).then(response => response.json()).then(data => {
                 document.getElementById('argForm').style.display = 'none';
                 document.getElementById('headerTitle').style.display = 'none';
+                var container = document.querySelector('.container');
+                container.style.display = 'none';
                 var resultDiv = document.getElementById('result');
                 resultDiv.innerHTML = "<strong>Argument:</strong> " + data.Argument + "<br><strong>Quality Score:</strong> " + data['Quality Score'];
                 resultDiv.style.display = 'block';
