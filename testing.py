@@ -3,8 +3,7 @@ import torch
 from transformers import BertTokenizer, BertForSequenceClassification
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
-# import matplotlib.pyplot as plt
-# from sklearn.model_selection import cross_val_score
+import matplotlib.pyplot as plt
 
 # Load pre-trained BERT model and tokenizer
 bertBase = "bert-base-uncased"
@@ -45,8 +44,8 @@ print("Prediction complete")
 mse = mean_squared_error(scores_test, predicted_scores_test)
 print(f"Mean Squared Error: {mse}")
 
-# plt.scatter(scores_test, predicted_scores_test)
-# plt.xlabel('Actual QS')
-# plt.ylabel('Predicted QS')
-# plt.title('Predicted vs Actual QS')
-# plt.show()
+plt.scatter(scores_test, predicted_scores_test)
+plt.xlabel('Actual QS')
+plt.ylabel('Predicted QS')
+plt.title('Predicted vs Actual QS')
+plt.show()

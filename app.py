@@ -8,7 +8,7 @@ bertBase = "bert-base-uncased"
 tokenizer = BertTokenizer.from_pretrained(bertBase)
 model = BertForSequenceClassification.from_pretrained(bertBase)
 
-def score_arg(text):
+def evaluate(text):
 
     text = ' '.join(text.split())
 
@@ -31,7 +31,7 @@ def home():
 @app.route('/evaluate', methods=['POST'])
 def score():
     data = request.form['text']
-    score = score_arg(data)
+    score = evaluate(data)
     
     score = round(100 * score, 2)
 
