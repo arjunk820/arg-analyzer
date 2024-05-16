@@ -9,7 +9,13 @@ tokenizer = BertTokenizer.from_pretrained(bertBase)
 model = BertForSequenceClassification.from_pretrained(bertBase)
 
 def score_arg(text):
-    encoded_inputs = tokenizer(text, return_tensors="pt", truncation=True)
+
+    text = ' '.join(text.split())
+
+    if len(text) < 10:
+        return -1.0
+
+    encoded_inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512)
     outputs = model(**encoded_inputs)
 
     probabilities = torch.softmax(outputs.logits, dim=-1).detach().numpy()
@@ -24,6 +30,9 @@ def home():
 def score():
     data = request.form['text']
     score = score_arg(data)
+    
+    score = round(100 * score, 2)
+
     return jsonify({'Argument': data, 'Quality Score': score})
 
 if __name__ == "__main__":
