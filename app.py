@@ -15,7 +15,7 @@ def score_arg(text):
     if len(text) < 10:
         return 0.0
 
-    encoded_inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512, padding='max_length', add_special_tokens=True)
+    encoded_inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512, padding=True)
 
     with torch.no_grad(): 
         outputs = model(**encoded_inputs)
