@@ -15,7 +15,7 @@ def score(text):
 
     text = ' '.join(text.split())
 
-    if len(text) < 10:
+    if len(text) < 16:
         return 0.0
 
     encoded_inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512)

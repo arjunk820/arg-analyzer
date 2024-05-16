@@ -1,3 +1,6 @@
 flask
 transformers
 torch
+pandas # for testing.py
+scikit-learn # for testing.py
+matplotlib # for testing.py
