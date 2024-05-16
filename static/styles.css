@@ -1,3 +1,5 @@
+/* Sets the default font for the page to 'Times New Roman' and serif as fallback,
+   The text color is dark blue and the background color is white. */
 body {
     font-family: 'Times New Roman', serif;
     background-color: #f4f1ea;
@@ -6,6 +8,7 @@ body {
     margin: 0;
 }
 
+/* The main container has a white background, shadow, and rounded corners. */
 .container {
     max-width: 800px;
     margin: auto;
@@ -15,6 +18,7 @@ body {
     border-radius: 8px;
 }
 
+/* Styles the header of the web application */
 .header-title {
     font-size: 24px;
     color: #004d40;
@@ -22,6 +26,7 @@ body {
     margin-bottom: 20px;
 }
 
+/* Styles the textarea within the argument-form class */
 .argument-form textarea {
     width: 100%;
     min-height: 200px;
@@ -31,6 +36,7 @@ body {
     padding: 10px;
 }
 
+/* Styles the submit button of argument-form */
 .argument-form input[type="submit"] {
     width: 100%;
     padding: 10px;
@@ -42,6 +48,7 @@ body {
     font-size: 16px;
 }
 
+/* Result of the argument-form, hidden until submit button is pressed. */
 .result-container {
     display: none;
     padding: 20px;
