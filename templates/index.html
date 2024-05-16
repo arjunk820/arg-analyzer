@@ -6,6 +6,7 @@
     <link rel="stylesheet" href="/static/styles.css">
 </head>
 <body>
+    <!-- The argument-form and header container defined -->
     <div class="container">
         <h1 id="headerTitle">Argument Quality Analyzer</h1>
         <form id="argForm">
@@ -18,22 +19,24 @@
         document.getElementById('argForm').onsubmit = function(event) {
             event.preventDefault();
             var formData = new FormData(this);
+            // Send a POST request to the server with the form data
             fetch('/evaluate', {
                 method: 'POST',
                 body: formData
             }).then(response => response.json()).then(data => {
+                // Hide the form and header title
                 document.getElementById('argForm').style.display = 'none';
                 document.getElementById('headerTitle').style.display = 'none';
                 var container = document.querySelector('.container');
-                container.style.display = 'none';
+                container.style.display = 'none'; // Hide the form when results are showing
                 var resultDiv = document.getElementById('result');
-                if (data['Quality Score'] === 0) { // if the argument is too short
+                if (data['Quality Score'] === 0) { // Handles case when argument is too short
                     resultDiv.innerHTML = "<br><strong>Error:</strong> The model is unable to score your provided argument";
                 } else {
                     resultDiv.innerHTML = "<strong>Argument:</strong> " + data.Argument + "<br><strong>Quality Score:</strong> " + data['Quality Score'] + '%';
                 }
                 resultDiv.style.display = 'block';
-            }).catch(error => console.error('Error:', error));
+            }).catch(error => console.error('Error:', error)); // Logs errors
         };
     </script>
 </body>
