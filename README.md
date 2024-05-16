@@ -1,15 +1,22 @@
+# Argument Analyzer
+
+## Introduction
+Argument Analyzer is a web application designed to assess the quality of text-based arguments. Built with Python and Flask, it utilizes a pre-trained BERT model to provide a quality score of user-submitted arguments.
+
 ## Setup
 
 Use the following commands to clone the repository, create and activate a Python virtual environment, and pip install all necessary libraries for this web application. All of the requirements for this web application are listed in requirements.txt.
 
-- git clone https://github.com/arjunk820/arg-analyzer.git
-- python -m venv venv
-- source venv/bin/activate
-- pip install -r requirements.txt
+``` bash
+git clone https://github.com/arjunk820/arg-analyzer.git
+python -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
 
 ## Usage
 
-- Use the command `python app.py` to run the web application
+- Use the command `python app.py` in bash to run the web application
 - Go to http://127.0.0.1:5000/ in order to see the web application your local machine.
 - Enter an argument in the form's text area and press submit.
 - A quality score and a copy of the argument inputted are returned by the application.
