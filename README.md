@@ -2,10 +2,10 @@
 
 Use the following commands to clone the repository, create and activate a Python virtual environment, and pip install all necessary libraries for this web application. All of the requirements for this web application are listed in requirements.txt.
 
-git clone https://github.com/arjunk820/arg-analyzer.git
-python -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
+- git clone https://github.com/arjunk820/arg-analyzer.git
+- python -m venv venv
+- source venv/bin/activate
+- pip install -r requirements.txt
 
 ## Usage
 
