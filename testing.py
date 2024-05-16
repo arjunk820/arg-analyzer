@@ -35,18 +35,23 @@ def score(text):
     
     return probabilities[:, 1].item()
 
+# Loads the dataset in the data folder
 df = pd.read_csv(CONFIG['dataset_path'])
 
 arguments = df['argument'].tolist()
 actual_scores = df['WA'].tolist()
 
+# Splits the data into training and testing and uses WA column for actual scores
 arguments_train, arguments_test, scores_train, scores_test = train_test_split(
     arguments, actual_scores, test_size=0.2, random_state=42
 )
 
 # WA allows for more ability to score quality on a continuous scale (0-1)
+
+# Predicts the score of the test data
 predicted_scores_test = [score(arg) for arg in arguments_test]
 
+# Prints out the MSE between WA and the predicted score
 mse = mean_squared_error(scores_test, predicted_scores_test)
 print(f"Mean Squared Error: {mse}")
 
