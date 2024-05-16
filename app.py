@@ -1,12 +1,12 @@
 from flask import Flask, request, jsonify, render_template
-from transformers import BertTokenizer, BertForSequenceClassification
+from transformers import AutoTokenizer, AutoModelForSequenceClassification
 import torch
 
 app = Flask(__name__)
 
-bertBase = "bert-base-uncased" # bert-large is too expensive
-tokenizer = BertTokenizer.from_pretrained(bertBase)
-model = BertForSequenceClassification.from_pretrained(bertBase)
+bertBase = "bert-base-uncased"
+tokenizer = AutoTokenizer.from_pretrained(bertBase)
+model = AutoModelForSequenceClassification.from_pretrained(bertBase)
 
 def score_arg(text):
 
@@ -15,7 +15,7 @@ def score_arg(text):
     if len(text) < 10:
         return 0.0
 
-    encoded_inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512)
+    encoded_inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512, padding='max_length', add_special_tokens=True)
     outputs = model(**encoded_inputs)
 
     probabilities = torch.softmax(outputs.logits, dim=-1).detach().numpy()

@@ -4,7 +4,7 @@ from transformers import BertTokenizer, BertForSequenceClassification
 from sklearn.metrics import mean_squared_error
 from sklearn.model_selection import train_test_split
 # import matplotlib.pyplot as plt
-from sklearn.model_selection import cross_val_score
+# from sklearn.model_selection import cross_val_score
 
 # Load pre-trained BERT model and tokenizer
 bertBase = "bert-base-uncased"
@@ -17,7 +17,7 @@ def score(text):
     text = ' '.join(text.split())
 
     if len(text) < 10:
-        return -1.0
+        return 0.0
 
     encoded_inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512)
     outputs = model(**encoded_inputs)
