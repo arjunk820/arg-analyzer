@@ -27,7 +27,11 @@
                 var container = document.querySelector('.container');
                 container.style.display = 'none';
                 var resultDiv = document.getElementById('result');
-                resultDiv.innerHTML = "<strong>Argument:</strong> " + data.Argument + "<br><strong>Quality Score:</strong> " + data['Quality Score'] + '%';
+                if (data['Quality Score'] === 0) { // if the argument is too short
+                    resultDiv.innerHTML = "<br><strong>Error:</strong> The model is unable to score your provided argument";
+                } else {
+                    resultDiv.innerHTML = "<strong>Argument:</strong> " + data.Argument + "<br><strong>Quality Score:</strong> " + data['Quality Score'] + '%';
+                }
                 resultDiv.style.display = 'block';
             }).catch(error => console.error('Error:', error));
         };
