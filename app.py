@@ -13,7 +13,7 @@ def score_arg(text):
     text = ' '.join(text.split())
 
     if len(text) < 10:
-        return -1.0
+        return 0.0
 
     encoded_inputs = tokenizer(text, return_tensors="pt", truncation=True, max_length=512)
     outputs = model(**encoded_inputs)
